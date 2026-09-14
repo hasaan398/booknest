@@ -1,0 +1,280 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f0f4ff;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a2e;
+}
+
+/* ── APP WRAPPER ── */
+.app {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ── HEADER ── */
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  color: #16213e;
+  font-weight: 800;
+}
+
+header p {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* ── SUMMARY STATS ── */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.stats span {
+  color: #444;
+}
+
+.stats strong {
+  color: #16213e;
+}
+
+/* ── FORM ── */
+form {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+form h2 {
+  font-size: 1rem;
+  margin-bottom: 14px;
+  color: #16213e;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+/* ── INPUTS ── */
+input[type="text"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #dde3f0;
+  border-radius: 8px;
+  font-size: 0.93rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #fafbff;
+}
+
+input[type="text"]:focus {
+  border-color: #16213e;
+  background: #fff;
+}
+
+/* ── SEARCH BAR ── */
+.search-wrap {
+  margin-bottom: 20px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #dde3f0;
+  border-radius: 8px;
+  font-size: 0.93rem;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: border 0.2s;
+}
+
+.search-wrap input:focus {
+  border-color: #16213e;
+}
+
+/* ── BUTTONS ── */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.btn-add {
+  background: #16213e;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 0.93rem;
+  white-space: nowrap;
+}
+
+.btn-toggle {
+  background: #e8eaf6;
+  color: #3c3c8e;
+}
+
+.btn-remove {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+/* ── ERROR ── */
+.error-msg {
+  color: #c0392b;
+  background: #fdecea;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+/* ── BOOK LIST ── */
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+li {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-left: 4px solid #dde3f0;
+  transition: border-color 0.2s;
+}
+
+li.read {
+  border-left-color: #2ecc71;
+  opacity: 0.8;
+}
+
+.book-info {
+  flex: 1;
+  min-width: 150px;
+}
+
+.book-info strong {
+  font-size: 1rem;
+  color: #16213e;
+  display: block;
+}
+
+.book-author {
+  font-size: 0.83rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.book-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.status-read {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-unread {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* ── EMPTY STATE ── */
+.empty-msg {
+  text-align: center;
+  color: #999;
+  padding: 50px 0;
+  background: #fff;
+  border-radius: 12px;
+  border: 1.5px dashed #ddd;
+  font-size: 1rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  .stats {
+    gap: 12px;
+    font-size: 0.85rem;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .btn-add {
+    width: 100%;
+  }
+}
+
+/* ── INPUT GROUP (label + input) ── */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.search-wrap label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 4px;
+  display: block;
+}
