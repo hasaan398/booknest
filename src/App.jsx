@@ -20,13 +20,11 @@ function SummaryStats({ books }) {
   );
 }
 
-// ── BOOK ITEM — PDF 4.3: har book ka alag extracted component ──────────────
 function BookItem({ book, onToggleRead, onRemove }) {
   return (
     <li className={book.read ? "read" : ""}>
       <div className="book-info">
         <strong>{book.title}</strong>
-        {/* Fix #8: data mein "" store — display mein "Unknown author" */}
         <span className="book-author">
           by {book.author || "Unknown author"}
         </span>
@@ -44,7 +42,6 @@ function BookItem({ book, onToggleRead, onRemove }) {
   );
 }
 
-// ── BOOK LIST — PDF 4.3: list rendering alag component mein ───────────────
 function BookList({ books, searchTerm, onToggleRead, onRemove }) {
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -74,7 +71,6 @@ function BookList({ books, searchTerm, onToggleRead, onRemove }) {
   );
 }
 
-// ── ADD BOOK FORM ──────────────────────────────────────────────────────────
 function AddBookForm({ onAddBook, titleRef }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -92,10 +88,8 @@ function AddBookForm({ onAddBook, titleRef }) {
     setError("");
 
     onAddBook({
-      // Fix #6: crypto.randomUUID() — Date.now() duplicate de sakta tha
       id: crypto.randomUUID(),
       title: trimmedTitle,
-      // Fix #8: author empty string store karo — "Unknown author" nahi
       author: author.trim(),
       read: false,
     });
@@ -109,7 +103,6 @@ function AddBookForm({ onAddBook, titleRef }) {
     <form onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="input-group">
-          {/* Fix #11: label add kiya */}
           <label htmlFor="title">Book Title *</label>
           <input
             id="title"
@@ -117,14 +110,12 @@ function AddBookForm({ onAddBook, titleRef }) {
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
-              // Fix #5: error clear ho jaye jab user type kare
               if (error) setError("");
             }}
             placeholder="e.g. Atomic Habits"
           />
         </div>
         <div className="input-group">
-          {/* Fix #11: label add kiya */}
           <label htmlFor="author">Author (optional)</label>
           <input
             id="author"
@@ -141,9 +132,13 @@ function AddBookForm({ onAddBook, titleRef }) {
 }
 
 // ── MAIN APP ───────────────────────────────────────────────────────────────
+
+
+
+
+
 export default function App() {
   const [books, setBooks] = useState(() => {
-    // Fix #7: try/catch — corrupt localStorage crash nahi karega
     try {
       const saved = localStorage.getItem("booknest-books");
       return saved ? JSON.parse(saved) : SAMPLE_BOOKS;
@@ -154,15 +149,12 @@ export default function App() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // PDF 4.8: useRef — autoFocus attribute nahi
   const titleRef = useRef(null);
 
-  // PDF 4.8: page load pe auto focus
   useEffect(() => {
     titleRef.current.focus();
   }, []);
 
-  // PDF 4.7: localStorage save — useEffect se
   useEffect(() => {
     localStorage.setItem("booknest-books", JSON.stringify(books));
   }, [books]);
@@ -195,7 +187,6 @@ export default function App() {
       <AddBookForm onAddBook={handleAddBook} titleRef={titleRef} />
 
       <div className="search-wrap">
-        {/* Fix #11: label add kiya search pe bhi */}
         <label htmlFor="search">🔍 Search by title</label>
         <input
           id="search"
@@ -205,7 +196,17 @@ export default function App() {
         />
       </div>
 
-      {/* Fix #4: BookList alag component — App sirf yahan render karta hai */}
+
+
+
+
+
+
+
+
+
+
+
       <BookList
         books={books}
         searchTerm={searchTerm}
