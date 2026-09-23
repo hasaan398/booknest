@@ -1,6 +1,8 @@
-import BookItem from "../bookitem/Bookitem.jsx";
+import { useNavigate } from "react-router-dom";
 
-function BookList({ books, searchTerm, onToggleRead, onRemove, onEdit }) {
+export default function BookList({ books, searchTerm, onToggleRead, onRemove }) {
+  const navigate = useNavigate();
+
   const filteredBooks = books.filter((book) =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -18,16 +20,41 @@ function BookList({ books, searchTerm, onToggleRead, onRemove, onEdit }) {
   return (
     <ul>
       {filteredBooks.map((book) => (
-        <BookItem
-          key={book.id}
-          book={book}
-          onToggleRead={onToggleRead}
-          onRemove={onRemove}
-          onEdit={onEdit}
-        />
+        <li key={book.id} className={book.read ? "read" : ""}>
+          <div className="book-info">
+            {/* Title pe click karo — detail page pe jao */}
+            <strong
+              className="book-title-link"
+              onClick={() => navigate(`/book/${book.id}`)}
+            >
+              {book.title}
+            </strong>
+            <span className="book-author">
+              by {book.author || "Unknown author"}
+            </span>
+            {book.note && (
+              <span className="book-note">📝 {book.note}</span>
+            )}
+          </div>
+
+          <span className={`book-status ${book.read ? "status-read" : "status-unread"}`}>
+            {book.read ? "✔ Read" : "📖 Unread"}
+          </span>
+
+          <button className="btn-toggle" onClick={() => onToggleRead(book.id)}>
+            {book.read ? "Mark Unread" : "Mark Read"}
+          </button>
+
+          {/* Edit — seedha edit page pe jao */}
+          <button className="btn-edit" onClick={() => navigate(`/book/${book.id}/edit`)}>
+            ✏️ Edit
+          </button>
+
+          <button className="btn-remove" onClick={() => onRemove(book.id)}>
+            🗑 Remove
+          </button>
+        </li>
       ))}
     </ul>
   );
 }
-
-export default BookList;

@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
 import useLocalStorageState from "./components/Uselocalstoragestate ·/Uselocalstoragestate ·.jsx";
-import SummaryStats from "./components/Summarystats/Summarystats.jsx";
-import AddBookForm from "./components/addbookform/Addbookform.jsx";
-import BookList from "./components/Booklist/Booklist.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import BookDetailPage from "./pages/HomePage.jsx";
+import BookEditPage from "./pages/BookEditPage.jsx";
 
 const SAMPLE_BOOKS = [
   { id: "sample-1", title: "Atomic Habits", author: "James Clear", read: false, note: "" },
@@ -17,10 +18,6 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useLocalStorageState("booknest-search", "");
 
   const titleRef = useRef(null);
-
-  useEffect(() => {
-    titleRef.current.focus();
-  }, []);
 
   const handleAddBook = (newBook) => {
     setBooks((prev) => [newBook, ...prev]);
@@ -47,33 +44,49 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <header>
-        <h1>📚 BookNest</h1>
-        <p>Your personal reading list tracker</p>
-      </header>
+    <BrowserRouter>
+      <Routes>
 
-      <SummaryStats books={books} />
-
-      <AddBookForm onAddBook={handleAddBook} titleRef={titleRef} />
-
-      <div className="search-wrap">
-        <label htmlFor="search">🔍 Search by title</label>
-        <input
-          id="search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="e.g. Harry..."
+        {/* Page 1 — Home: book list */}
+        <Route
+          path="/"
+          element={
+            <HomePage
+              books={books}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              titleRef={titleRef}
+              onAddBook={handleAddBook}
+              onToggleRead={handleToggleRead}
+              onRemove={handleRemove}
+            />
+          }
         />
-      </div>
 
-      <BookList
-        books={books}
-        searchTerm={searchTerm}
-        onToggleRead={handleToggleRead}
-        onRemove={handleRemove}
-        onEdit={handleEdit}
-      />
-    </div>
+        {/* Page 2 — Book Detail: ek book ki detail */}
+        <Route
+          path="/book/:id"
+          element={
+            <BookDetailPage
+              books={books}
+              onToggleRead={handleToggleRead}
+              onRemove={handleRemove}
+            />
+          }
+        />
+
+        {/* Page 3 — Book Edit: ek book edit karo */}
+        <Route
+          path="/book/:id/edit"
+          element={
+            <BookEditPage
+              books={books}
+              onEdit={handleEdit}
+            />
+          }
+        />
+
+      </Routes>
+    </BrowserRouter>
   );
 }

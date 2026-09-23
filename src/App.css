@@ -295,3 +295,72 @@ li.read {
   display: block;
   margin-top: 2px;
 }
+/* Yeh saari cheezein apne App.css ke end mein add karo */
+
+/* Back button */
+.btn-back {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+/* Detail page wrap */
+.detail-wrap {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* Detail card */
+.detail-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.detail-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.6rem;
+}
+
+.detail-author {
+  color: #666;
+  margin: 4px 0 12px 0;
+}
+
+.detail-note {
+  margin-top: 12px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Detail page action buttons */
+.detail-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Book title clickable */
+.book-title-link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: inherit;
+}
+
+.book-title-link:hover {
+  color: #f0a500;
+}
+
+/* Edit page form */
+.edit-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
